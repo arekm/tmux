@@ -1726,8 +1726,7 @@ screen_write_deleteline(struct screen_write_ctx *ctx, u_int ny, u_int bg)
 		screen_write_collect_flush(ctx, 0, __func__);
 		ttyctx.n = ny;
 
-		ry = s->rlower + 1 - s->rupper;
-		if (!screen_write_should_draw_lines(ctx, s->rupper, ry))
+		if (!screen_write_should_draw_lines(ctx, s->cy, sy - s->cy))
 			return;
 		if (~ttyctx.flags & TTY_CTX_PANE_OBSCURED || ctx->wp == NULL) {
 			tty_write(tty_cmd_deleteline, &ttyctx);
